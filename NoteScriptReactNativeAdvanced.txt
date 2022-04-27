@@ -190,3 +190,653 @@ ch1Animation
     metro.config.js
     package-lock.json
     package.json
+
+//--------------------------------------------------------------
+# วันที่ 2
+//--------------------------------------------------------------
+Step 10: ติดตั้ง react-native-animatable
+--
+npm install react-native-animatable
+
+Step 11: ติดตั้ง Lottie animation
+---
+npm i lottie-react-native
+npm i lottie-ios@3.2.3
+
+ขึ้นโปรเจ็กต์ใหม่
+---
+git clone https://github.com/iamsamitdev/ch1Animation.git ch2ContextAPI
+
+เปิดเข้า VSCode
+---
+code ch2ContextAPI -r
+
+Context API
+
+What is Context API?
+---
+Context provides a way to pass data through the component tree without having to pass props down manually at every level
+
+Building Block of Context API
+---
+We can divide Context API in to three parts.
+Context
+First import React from ‘react’. Then, createContext() function from React which takes default value as a first argument. In here optional to pass a Java Script object. There can be multiple context in a single application
+
+Provider
+After create context, Provider Provides the capability to access context which wrapped from it. It provides the data and functions to pass down to all the components.
+
+Consumer
+Consumer allows to access the value to child components which parent that is wrapped by Provider. It has two types.
+
+//--------------------------------------------------------------
+# วันที่ 3
+//--------------------------------------------------------------
+ch2ContactAPI
+    __tests__
+    .bundle
+    .git
+    .vscode
+    android
+    ios
+    node_modules
+    src
+        |-- assets
+            |-- images
+                |-- logo.png
+        |-- components
+            |-- Cart.js
+        |-- store
+            |-- Context.js
+            |-- CounterState.js
+            |-- UserState.js
+        |-- model
+            |-- users.js
+        |-- navigations
+            |-- AppStack.js
+            |-- Navigation.js
+            |-- RootStack.js
+        |-- screens
+            |-- Home.js
+            |-- SplashScreen.js
+            |-- SignInScreen.js
+            |-- SignUpScreen.js
+        |-- themes
+            |-- MainTheme.js
+    .buckconfig
+    .eslintrc.js
+    .flowconfig
+    .gitignore
+    .prettierrc.js
+    .ruby-version
+    .watchmanconfig
+    App.js
+    app.json
+    babel.config.js
+    Gemfile
+    Gemfile.lock
+    index.js
+    metro.config.js
+    package-lock.json
+    package.json
+
+ขั้นตอนการใช้งาน Context API ใน React Native
+---
+Step 1: สร้างไฟล์ Context.js ในโฟลเดอร์ src/store/Context.js
+---
+import React, { createContext } from 'react'
+
+// สร้าง Object Context
+const Context = createContext({})
+
+export default Context
+
+Step 2: สร้างไฟล์เก็บตัวแปร state และฟังก์ชันการทำงาน 
+---
+src/store/CounterState.js
+
+Authentication และ Authorization ใน React Native
+
+Step 1: clone project from github
+---
+git clone  https://github.com/iamsamitdev/ch1Animation.git ch3Authentication
+
+Step 2: install library
+---
+npm i react-native-animatable@1.3.3
+npm i react-native-linear-gradient@2.5.6
+npm i react-native-vector-icons@9.1.0
+
+Step 3: Link resource
+---
+react-native link
+
+Step 4: Create "SplashScreen.js" in /src/screens/SplashScreen.js
+---
+import React from 'react'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  StyleSheet,
+  StatusBar,
+  Image,
+} from 'react-native'
+import * as Animatable from 'react-native-animatable'
+import LinearGradient from 'react-native-linear-gradient'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import  MainTheme, { colors }  from '../themes/MainTheme'
+
+const SplashScreen = ({ navigation }) => {
+
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+      <View style={styles.header}>
+        <Animatable.Image
+          animation="bounceIn"
+          duraton="1500"
+          source={require('../assets/images/logo.png')}
+          style={styles.logo}
+          resizeMode="stretch"
+        />
+      </View>
+      <Animatable.View
+        style={styles.footer}
+        animation="fadeInUpBig">
+        <Text
+          style={styles.title}>
+          ระบบร้านค้าซื้อขายแลกเปลี่ยนสำหรับทุกคน
+        </Text>
+        <Text style={styles.text}>เข้าใช้งานด้วยบัญชีของคุณ</Text>
+        <View style={styles.button}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+            <LinearGradient
+              colors={[colors.background1, colors.background]}
+              style={styles.signIn}>
+              <Text style={styles.textSign}>เริ่มต้นใช้งาน</Text>
+              <MaterialIcons name="navigate-next" color={colors.textLight} size={20} />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </View>
+  )
+}
+
+export default SplashScreen
+
+const { height } = Dimensions.get('screen')
+const height_logo = height * 0.28
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  header: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: colors.textLight,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingVertical: 50,
+    paddingHorizontal: 30,
+  },
+  logo: {
+    width: height_logo,
+    height: height_logo,
+  },
+  title: {
+    color: colors.textDark,
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  text: {
+    color: 'grey',
+    marginTop: 5,
+  },
+  button: {
+    alignItems: 'flex-end',
+    marginTop: 30,
+  },
+  signIn: {
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    flexDirection: 'row',
+  },
+  textSign: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+})
+
+
+Step 5: Create "SignInScreen.js" in /src/screens/SignInScreen.js
+---
+import React from 'react'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+  StyleSheet,
+  StatusBar,
+  Alert,
+} from 'react-native'
+import * as Animatable from 'react-native-animatable'
+import LinearGradient from 'react-native-linear-gradient'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Feather from 'react-native-vector-icons/Feather'
+import MainTheme, { colors } from '../themes/MainTheme'
+
+const SignInScreen = ({navigation}) => {
+  return (
+    <View style={styles.container}>
+      
+      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+      
+      <View style={styles.header}>
+        <Text style={styles.text_header}>ยินดีต้อนรับ</Text>
+      </View>
+
+      <Animatable.View
+        animation="fadeInUpBig"
+        style={styles.footer}>
+
+        <Text
+          style={styles.text_footer}>
+          Username
+        </Text>
+
+        <View style={styles.action}>
+          <FontAwesome name="user-o" color={colors.text} size={20} />
+          <TextInput
+            placeholder="ป้อนชื่อผู้ใช้"
+            placeholderTextColor={colors.textholder}
+            style={[
+              styles.textInput,
+            ]}
+            autoCapitalize="none"
+          />
+        </View>
+
+        <Text
+          style={[
+            styles.text_footer,
+            {
+              marginTop: 35,
+            },
+          ]}>
+          Password
+        </Text>
+
+        <View style={styles.action}>
+          <Feather name="lock" color={colors.text} size={20} />
+          <TextInput
+            placeholder="ป้อนรหัสผ่าน"
+            placeholderTextColor={colors.textholder}
+            secureTextEntry={true}
+            style={styles.textInput}
+            autoCapitalize="none"
+          />
+        </View>
+
+        <TouchableOpacity>
+          <Text style={{ color: colors.background, marginTop: 15 }}>
+            ฉันลืมรหัสผ่าน ?
+          </Text>
+        </TouchableOpacity>
+
+        <View style={styles.button}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={() => {}}>
+            <LinearGradient
+              colors={[colors.background1, colors.background]}
+              style={styles.signIn}>
+              <Text
+                style={styles.textSign}>
+                เข้าสู่ระบบ
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SignUpScreen')}
+            style={[
+              styles.signIn,
+              {
+                borderColor: colors.background,
+                borderWidth: 1,
+                marginTop: 15,
+              },
+            ]}>
+            <Text
+              style={[
+                styles.textSign,
+                {
+                  color: colors.background,
+                },
+              ]}>
+              ลงทะเบียน
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </View>
+  )
+}
+
+export default SignInScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: 3,
+    backgroundColor: colors.textLight,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: colors.textLight,
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  text_footer: {
+    color: colors.textDark,
+    fontSize: 18,
+  },
+  action: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.forground3,
+    paddingBottom: 5,
+  },
+  actionError: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.background2,
+    paddingBottom: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    paddingLeft: 10,
+    color: colors.textDark,
+  },
+  errorMsg: {
+    color: colors.background2,
+    fontSize: 14,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  signIn: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.textLight,
+  },
+})
+
+
+Step 6: Create "SignUpScreen.js" in /src/screens/SignUpScreen.js
+---
+import React from 'react'
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Dimensions,
+  TextInput,
+  Platform,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+} from 'react-native'
+import * as Animatable from 'react-native-animatable'
+import LinearGradient from 'react-native-linear-gradient'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Feather from 'react-native-vector-icons/Feather'
+import MainTheme, { colors } from '../themes/MainTheme'
+
+const SignInScreen = ({ navigation }) => {
+
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+      <View style={styles.header}>
+        <Text style={styles.text_header}>ลงทะเบียนฟรี!</Text>
+      </View>
+      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <ScrollView>
+          <Text style={styles.text_footer}>Username</Text>
+          
+          <View style={styles.action}>
+            <FontAwesome name="user-o" color={colors.text} size={20} />
+            <TextInput
+              placeholder="ป้อนชื่อผู้ใช้"
+              style={styles.textInput}
+              autoCapitalize="none"
+            />
+          </View>
+
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                marginTop: 35,
+              },
+            ]}>
+            Password
+          </Text>
+          <View style={styles.action}>
+            <Feather name="lock" color={colors.textDark} size={20} />
+            <TextInput
+              placeholder="ป้อนรหัสผ่าน"
+              secureTextEntry={true}
+              style={styles.textInput}
+              autoCapitalize="none"
+            />
+          </View>
+
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                marginTop: 35,
+              },
+            ]}>
+            Confirm Password
+          </Text>
+          <View style={styles.action}>
+            <Feather name="lock" color={colors.textDark} size={20} />
+            <TextInput
+              placeholder="ป้อนยืนยันรหัสผ่าน"
+              secureTextEntry={true}
+              style={styles.textInput}
+              autoCapitalize="none"
+            />
+          </View>
+          <View style={styles.textPrivate}>
+            <Text style={styles.color_textPrivate}>
+              ท่านรับทราบและยอมรับ
+            </Text>
+            <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
+              {' '}
+              เงื่อนไข
+            </Text>
+            <Text style={styles.color_textPrivate}> และ</Text>
+            <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
+              {' '}
+              นโนบายการใช้งาน
+            </Text>
+          </View>
+          <View style={styles.button}>
+            <TouchableOpacity style={styles.signIn} onPress={() => {}}>
+              <LinearGradient
+                colors={[colors.background1, colors.background]}
+                style={styles.signIn}>
+                <Text
+                  style={[
+                    styles.textSign,
+                    {
+                      color: colors.textLight,
+                    },
+                  ]}>
+                  ลงทะเบียน
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={[
+                styles.signIn,
+                {
+                  borderColor: colors.background,
+                  borderWidth: 1,
+                  marginTop: 15,
+                },
+              ]}>
+              <Text
+                style={[
+                  styles.textSign,
+                  {
+                    color: colors.background,
+                  },
+                ]}>
+                เข้าสู่ระบบ
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </Animatable.View>
+    </View>
+  )
+}
+
+export default SignInScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: Platform.OS === 'ios' ? 3 : 5,
+    backgroundColor: colors.textLight,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: colors.textLight,
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  text_footer: {
+    color: colors.background,
+    fontSize: 18,
+  },
+  action: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.forground3,
+    paddingBottom: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    paddingLeft: 10,
+    color: colors.background,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  signIn: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  textPrivate: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 20,
+  },
+  color_textPrivate: {
+    color: 'grey',
+  },
+})
+
+Step 7: Create "users.js" in /src/models/users.js
+---
+export default Users = [
+    {
+        id: 1, 
+        email: 'user1@email.com',
+        username: 'user1', 
+        password: 'password', 
+        userToken: 'token123'
+    },
+    {
+        id: 2, 
+        email: 'user2@email.com',
+        username: 'user2', 
+        password: 'pass1234', 
+        userToken: 'token12345'
+    },
+    {
+        id: 3, 
+        email: 'testuser@email.com',
+        username: 'testuser', 
+        password: 'testpass', 
+        userToken: 'testtoken'
+    },
+];
