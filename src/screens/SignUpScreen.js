@@ -17,7 +17,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import MainTheme, { colors } from '../themes/MainTheme'
 
-const SignInScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   // สร้างตัวแปรรับค่าจากฟอร์ม
   const [data, setData] = useState({
     username: '',
@@ -265,7 +265,7 @@ const SignInScreen = ({ navigation }) => {
   )
 }
 
-export default SignInScreen
+export default SignUpScreen
 
 const styles = StyleSheet.create({
   container: {
